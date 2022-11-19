@@ -10,4 +10,7 @@ pipeline{
                 git credentialsId: 'server', url: 'https://github.com/amazonprasad/frontend.git'
             }
        }
+    }
+  }
+  
        
