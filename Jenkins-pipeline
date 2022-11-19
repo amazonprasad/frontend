@@ -1,0 +1,13 @@
+pipeline{
+    agnet any 
+    
+    environment{
+        PATH= "/opt/maven/bin:$PATH"
+    }
+    stages{
+       stage("Git Checkout"){
+          steps{
+                git credentialsId: 'server', url: 'https://github.com/amazonprasad/frontend.git'
+            }
+       }
+       
