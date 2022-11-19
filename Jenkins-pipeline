@@ -1,16 +1,36 @@
 pipeline{
-    agnet any 
+    agent any
     
     environment{
-        PATH= "/opt/mvn/bin:$PATH"
+        PATH = "/opt/mvn/bin:$PATH"
     }
     stages{
-       stage("Git Checkout"){
-          steps{
+        stage("Git Checkout"){
+            steps{
                 git credentialsId: 'server', url: 'https://github.com/amazonprasad/frontend.git'
             }
-       }
+        }
+        stage("Maven Build"){
+            steps{
+                sh "mvn clean package"
+                
+            }
+        }
+        stage("deploy-dev"){
+            steps{
+                sshagent(['tomcat-new']) {
+                sh """
+                    scp -o StrictHostKeyChecking=no target/Calendar.war  ubuntu@172.31.87.181:/opt/tomcat/webapps/
+                    
+                    ssh ubuntu@172.31.87.181 /opt/tomcat/bin/shutdown.sh
+                    
+                    ssh ubuntu@172.31.87.181 /opt/tomcat/bin/startup.sh
+                
+                """
+            }
+            
+            }
+        }
     }
-  }
-  
+}
        
