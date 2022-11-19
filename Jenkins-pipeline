@@ -20,11 +20,11 @@ pipeline{
             steps{
                 sshagent(['tomcat-new']) {
                 sh """
-                    scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/flipkart-9/Calendar.war  ubuntu@172.31.87.181:/opt/tomcat/webapps/
+                    scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/flipkart-9/Calendar.war  ubuntu@172.31.27.211:/opt/tomcat/webapps/
                     
-                    ssh ubuntu@172.31.87.181 /opt/tomcat/bin/shutdown.sh
+                    ssh ubuntu@172.31.27.211 /opt/tomcat/bin/shutdown.sh
                     
-                    ssh ubuntu@172.31.87.181 /opt/tomcat/bin/startup.sh
+                    ssh ubuntu@172.31.27.211 /opt/tomcat/bin/startup.sh
                 
                 """
             }
