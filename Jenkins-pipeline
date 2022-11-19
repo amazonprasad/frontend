@@ -2,7 +2,7 @@ pipeline{
     agnet any 
     
     environment{
-        PATH= "/opt/maven/bin:$PATH"
+        PATH= "/opt/mvn/bin:$PATH"
     }
     stages{
        stage("Git Checkout"){
